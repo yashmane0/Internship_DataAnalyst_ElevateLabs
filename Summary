@@ -1,0 +1,17 @@
+Identify and handle missing values:
+Use .isnull() to check for missing values in your dataset. You can then handle them by either filling them with a default value using .fillna() or removing rows/columns with .dropna().
+
+Remove duplicate rows:
+The .drop_duplicates() method removes duplicate rows from your dataset, ensuring each row is unique. This is essential to clean up repetitive data that may skew analysis.
+
+Standardize text values:
+Standardizing text values (e.g., gender, country names) involves normalizing variations like capitalization and extra spaces. You can use .str.strip() to remove spaces and .str.capitalize() to format text consistently.
+
+Convert date formats to a consistent type (dd-mm-yyyy):
+The .to_datetime() function allows you to convert dates to a consistent format. Specify the format using format='%d-%m-%Y' to ensure all dates follow the same structure.
+
+Rename column headers to be clean and uniform:
+Column names can be standardized by converting them to lowercase and replacing spaces with underscores. This ensures your DataFrame has clean and consistent column labels.
+
+Check and fix data types:
+Use .astype() or .to_numeric() to ensure columns have the correct data type, such as converting age to integers or dates to datetime. This ensures proper analysis and avoids errors during operations.

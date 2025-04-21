@@ -1,22 +1,13 @@
 import pandas as pd
-from datetime import datetime, timedelta
-import random
+from datetime import datetime
+
 
 # Load the CSV file
 file_path = 'Mall_Customers.csv'
 df = pd.read_csv(file_path)
 
-# Define a date range
-start_date = datetime(2020, 1, 1)
-end_date = datetime(2023, 12, 31)
-
-# Generate random dates for each row
-df['Date'] = [
-    (start_date + timedelta(days=random.randint(0, (end_date - start_date).days))).strftime('%Y-%m-%d')
-    for _ in range(len(df))
-]
 #Convert the 'Date' column to datetime format
-df['Date']=pd.to_datetime(df['Date'], format='%Y-%m-%d')
+df['date']=pd.to_datetime(df['date'],  dayfirst=True, errors='coerce')
 print('converted Date Column to datetime format')
 # Print the first few rows of the updated DataFrame to verify the changes
 print(df.head())
@@ -25,7 +16,7 @@ print(df.head())
 if df.isnull().values.any():
     print("Missing values found in the DataFrame.")
     #Fill Null values with the mean of the column
-    df=df.fillna(df.mean()) 
+    df=df.fillna(df.select_dtypes(include='number').mean()) 
     print("replaced null with mean values")
 else:
     print("No missing values found in the DataFrame.")

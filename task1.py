@@ -18,9 +18,6 @@ df['Date'] = [
 #Convert the 'Date' column to datetime format
 df['Date']=pd.to_datetime(df['Date'], format='%Y-%m-%d')
 print('converted Date Column to datetime format')
-# Save the updated DataFrame back to the CSV file
-df.to_csv(file_path, index=False)
-
 # Print the first few rows of the updated DataFrame to verify the changes
 print(df.head())
 
@@ -28,14 +25,20 @@ print(df.head())
 if df.isnull().values.any():
     print("Missing values found in the DataFrame.")
     #Fill Null values with the mean of the column
-    df.fillna(df.mean(), inplace=True) 
+    df=df.fillna(df.mean()) 
     print("replaced null with mean values")
 else:
     print("No missing values found in the DataFrame.")
 # Remove Duplicates
-df.drop_duplicates(inplace=True)
+df=df.drop_duplicates()
 print("removed duplicates")
 # Standarize text values for gender column with first letter upper case and rest lower case
 if 'Gender' in df.columns:
     df['Gender'] = df['Gender'].str.strip().str.capitalize()
     print("capitalized Gender column")
+df.columns=[col.strip().lower().replace(' ','_') for col in df.columns]
+print("standardized column names")
+# Save the updated DataFrame back to the CSV file
+df.to_csv(file_path, index=False)
+
+
